@@ -1,10 +1,49 @@
-# linea# Linea
+# Linea
 
 Linea is a minimal and fast text editor focused on simplicity.
 
 The goal of Linea is to provide a clean writing environment for notes, drafts, and quick text editing without distractions.
 
 The project starts as a **web application**, but the architecture is designed to support **mobile in the future**.
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) >= 18
+
+### Install dependencies
+
+```bash
+cd apps/web
+npm install
+```
+
+### Run the development server
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Preview the production build
+
+```bash
+npm run preview
+```
+
+### Lint
+
+```bash
+npm run lint
+```
 
 ## Vision
 
@@ -31,6 +70,7 @@ The first version focuses on the core experience.
 * Local storage persistence
 * Simple note list sidebar
 * Clean distraction-free editor
+* Search across notes
 
 ## Future Features
 
@@ -43,25 +83,26 @@ These are not part of the MVP but guide the architecture.
 * Mobile apps
 * Export notes
 * Keyboard-first navigation
-* Search across notes
 
-## Tech Stack (Initial)
+## Tech Stack
 
-* React
+* React 19
 * TypeScript
 * Vite
-* LocalStorage or IndexedDB
-* Simple component architecture
+* LocalStorage
+* No heavy UI libraries
 
 The project prioritizes **simplicity and maintainability**.
 
 ## Project Structure
 
+```
 /apps
- web → main web application
+  web → main web application
 
 /docs
- DeveloperGuide.md → project development rules and architecture
+  DeveloperGuide.md → project development rules and architecture
+```
 
 ## Philosophy
 
