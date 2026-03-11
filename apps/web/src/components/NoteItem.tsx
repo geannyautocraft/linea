@@ -16,19 +16,30 @@ function formatDate(timestamp: number): string {
   });
 }
 
+function getPreview(content: string): string {
+  const lines = content.split('\n');
+  const secondLine = lines.slice(1).find((l) => l.trim() !== '');
+  return secondLine?.trim() || '';
+}
+
 export const NoteItem = memo(function NoteItem({
   note,
   isActive,
   onClick,
   onDelete,
 }: NoteItemProps) {
+  const preview = getPreview(note.content);
+
   return (
     <div
       className={`sidebar-item${isActive ? ' sidebar-item--active' : ''}`}
       onClick={onClick}
     >
       <div className="sidebar-item-title">{note.title}</div>
-      <div className="sidebar-item-date">{formatDate(note.updatedAt)}</div>
+      <div className="sidebar-item-meta">
+        <span className="sidebar-item-date">{formatDate(note.updatedAt)}</span>
+        {preview && <span className="sidebar-item-preview">{preview}</span>}
+      </div>
       <button
         className="sidebar-item-delete"
         onClick={(e) => {

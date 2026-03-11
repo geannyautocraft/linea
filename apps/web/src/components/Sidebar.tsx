@@ -1,5 +1,6 @@
 import type { Note } from '../types/Note';
 import { NoteItem } from './NoteItem';
+import { useNoteSearch } from '../hooks/useNoteSearch';
 
 interface SidebarProps {
   notes: Note[];
@@ -16,7 +17,9 @@ export function Sidebar({
   onCreateNote,
   onDeleteNote,
 }: SidebarProps) {
-  const sorted = [...notes].sort((a, b) => b.updatedAt - a.updatedAt);
+  const { query, setQuery, filtered } = useNoteSearch(notes);
+  const sorted = [...filtered].sort((a, b) => b.updatedAt - a.updatedAt);
+  const hasNotes = notes.length > 0;
 
   return (
     <aside className="sidebar">
@@ -26,9 +29,22 @@ export function Sidebar({
           + New
         </button>
       </div>
+      {hasNotes && (
+        <div className="sidebar-search">
+          <input
+            className="sidebar-search-input"
+            type="text"
+            placeholder="Search notes..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
+      )}
       <div className="sidebar-list">
-        {sorted.length === 0 ? (
+        {!hasNotes ? (
           <div className="sidebar-empty">No notes yet</div>
+        ) : sorted.length === 0 ? (
+          <div className="sidebar-empty">No notes found</div>
         ) : (
           sorted.map((note) => (
             <NoteItem
